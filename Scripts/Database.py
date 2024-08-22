@@ -1,4 +1,3 @@
-
 class Database:
 
     def __init__ (self):
@@ -12,7 +11,13 @@ class Database:
     
     
     def read(self, id):
-        print(f"{id} | {self.usuarios[id].username} | {self.usuarios[id].email}")
+        
+        if 0 <= id < len(self.usuarios):
+            print(f"{id} | {self.usuarios[id].username} | {self.usuarios[id].email}")
+        else:
+            print("ID inválido.")
     
     def getLenght(self):
         return len(self.usuarios)
+    
+    

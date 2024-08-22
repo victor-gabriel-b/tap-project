@@ -7,9 +7,6 @@ class Usuario:
         self.password = password
     
     
-    
-    
-    
     #Classes Getters & Setters
         
     def setUsername(self, username):

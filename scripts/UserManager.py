@@ -15,14 +15,17 @@ class UserManager:
     def db_conection(self):
         # Check if the file exists before even trying to read from it. This is done so we can tell the difference between "File does not exists" and "THE FILE IS ALL WRONG"
         if os.path.isfile(DATABASE_PATH):
+            
             try:
                 with open(DATABASE_PATH, 'rb') as db_in:
                     # If it works, the connection is done and we get out
                     self.database = pickle.load(db_in)
+                    print(self.database.getLenght())
                     return
             except IOError as e:
                 print(f"Arquivo existe mas houve falha na leitura. Um banco vazio será criado e o arquivo será sobrescrito ao salvar. Erro: {e}")
 
+        print("ae")
         # If anything goes even slightly wrong we arrive here
         self.database = Database()
 
@@ -31,7 +34,7 @@ class UserManager:
         
         try:
             user_validation(username, password)
-        except ValueError as e:
+        except InvalidLoginException as e:
             print(f"Erro: {e}")
             return
     

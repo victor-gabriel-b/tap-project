@@ -3,12 +3,13 @@ from UserManager import *
 
 UserManager = UserManager()
 
-UserManager.add_user("WesleySilva", "wesley.abc@hotmail.com", "Abcdefg1!")  #Válido
-UserManager.add_user("ZeAlysson", "ze.aly@hotmail.com", "Senha@123")  #Válido
-UserManager.add_user("Ze", "ze@hotmail.com", "Senha@123")  #Válido
+#UserManager.add_user("WesleySilva", "wesley.abc@hotmail.com", "Abcdefg1!")  #Válido
+#UserManager.add_user("ZeAlysson", "ze.aly@hotmail.com", "Senha@123")  #Válido
+#UserManager.add_user("Ze", "ze@hotmail.com", "Senha@123")  #Válido
+#UserManager.add_user("Zezin", "ze@hotmail.com", "Senha@123")  #Válido
 # Testes para username inválidos:
 #UserManager
-#.add_user("NomeMuitoGrandeDeUsuario", "wesley.abc@hotmail.com", "Abcdefg1!")  # Username com mais de 12 caracteres
+#UserManager.add_user("NomeMuitoGrandeDeUsuario", "wesley.abc@hotmail.com", "Abcdefg1!")  # Username com mais de 12 caracteres
 #UserManager
 #.add_user("", "ze.alysson@hotmail.com", "Senha@123")  # Erro: O login não pode ser vazio.
 #UserManager
@@ -28,6 +29,5 @@ UserManager.add_user("Ze", "ze@hotmail.com", "Senha@123")  #Válido
 #UserManager
 #.add_user("ZeAlysson", "ze.alysson@hotmail.com", "Senha123456789!")  # Erro: A senha deve ter no máximo 12 caracteres.
 
-
-
 UserManager.list_users()
+UserManager.save()

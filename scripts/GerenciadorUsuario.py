@@ -1,6 +1,6 @@
 from Database import *
 from Usuario import *
-from validacoes import *
+from scripts.login_validation import *
 
 
 class GerenciadorUsuario:

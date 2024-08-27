@@ -3,9 +3,9 @@ from UserManager import *
 
 UserManager = UserManager()
 
-#UserManager.add_user("WesleySilva", "wesley.abc@hotmail.com", "Abcdefg1!")  #Válido
-#UserManager.add_user("ZeAlysson", "ze.aly@hotmail.com", "Senha@123")  #Válido
-#UserManager.add_user("Ze", "ze@hotmail.com", "Senha@123")  #Válido
+UserManager.add_user("WesleySilva", "wesley.abc@hotmail.com", "Abcdefg1!")  #Válido
+UserManager.add_user("ZeAlysson", "ze.aly@hotmail.com", "Senha@123")  #Válido
+UserManager.add_user("Ze", "ze@hotmail.com", "Senha@123")  #Válido
 #UserManager.add_user("Zezin", "ze@hotmail.com", "Senha@123")  #Válido
 # Testes para username inválidos:
 #UserManager

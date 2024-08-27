@@ -1,23 +1,28 @@
 class Database:
 
+    #create the database
     def __init__ (self):
-        self.usuarios = []
+        self.users = []
         self.id = -1
 
-    def add(self, usuario):
+
+    #add an user to the database and return it's id
+    def add(self, users):
         self.id = self.id + 1
-        self.usuarios.append(usuario)
+        self.users.append(users)
         return self.getLenght()
     
     
+    #Search in the database for the user's id
     def read(self, id):
-        
-        if 0 <= id < len(self.usuarios):
-            print(f"{id} | {self.usuarios[id].username} | {self.usuarios[id].email}")
+        if 0 <= id < len(self.users):
+            print(f"{id} | {self.users[id].username} | {self.users[id].email}")
+            
         else:
             print("ID inválido.")
     
+    #return the "last id"
     def getLenght(self):
-        return len(self.usuarios)
+        return len(self.users)
     
     

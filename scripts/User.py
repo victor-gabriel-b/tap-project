@@ -1,5 +1,6 @@
 
-class Usuario:
+class User:
+    
     def __init__(self, id, username, email, password):
         self.id = id
         self.username = username
@@ -7,8 +8,7 @@ class Usuario:
         self.password = password
     
     
-    #Classes Getters & Setters
-        
+    #Getters & Setters classes  
     def setUsername(self, username):
         self.username = username
         
@@ -23,11 +23,11 @@ class Usuario:
         return self.email
 
         
-    def setSenha(self, senha):
-        self.senha = senha
+    def setPassword(self, password):
+        self.password = password
         
-    def getSenha(self):
-        return self.senha
+    def getPassword(self):
+        return self.password
 
 
     def setId(self, id):

@@ -7,9 +7,9 @@ class Database:
 
 
     #add an user to the database and return it's id
-    def add(self, users):
+    def add(self, user):
         self.id = self.id + 1
-        self.users.append(users)
+        self.users.append(user)
         return self.getLenght()
     
     

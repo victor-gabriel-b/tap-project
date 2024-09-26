@@ -14,7 +14,7 @@ class InvalidLoginException extends Exception {
 public class LoginValidation {
     
     // This function was made to verify the data of the login and password. The mensages from the Exceptions are in Brazilian Portuguese language. Because the app is going to be inicially for the brazilian clients
-    public static boolean userValidation(String username, String password) throws InvalidLoginException {
+    public boolean userValidation(String username, String password) throws InvalidLoginException {
         
         if (username == null || username.isEmpty()) {
 

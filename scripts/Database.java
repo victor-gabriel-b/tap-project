@@ -4,7 +4,6 @@ import java.sql.*;
 public class Database{
     
     private ArrayList<String> users;
-    private int id;
     private Connection connection;
 
     private static Database instance;
@@ -13,7 +12,6 @@ public class Database{
         this.connection = this.getConnection();
 
         this.users = new ArrayList<>();
-        this.id = -1;
     }
 
     public static synchronized Database getInstance(){
@@ -36,7 +34,18 @@ public class Database{
 
         return null;
     }
+
+    public void execute(String sql){
+        try {
+            Statement stmt = this.connection.createStatement();
+            stmt.execute(sql);
+        }
+        catch (SQLException e) {
+           System.out.println(e.getMessage());
+        }
+    }
     
+    /* 
     public void createTables(){
         String sql = "CREATE TABLE IF NOT EXISTS users ("
         + "	id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -52,7 +61,9 @@ public class Database{
            System.out.println(e.getMessage());
         }
     }
+    */
 
+    /* 
     public int add(String user){
         String sql = "INSERT INTO users (username, email, password)" 
         + "VALUES"
@@ -65,6 +76,8 @@ public class Database{
            System.out.println(e.getMessage());
         }
     }
+    */
+
 
     public void read(int id){
 

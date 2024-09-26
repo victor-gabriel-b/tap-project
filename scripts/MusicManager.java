@@ -1,28 +1,31 @@
 import java.sql.*;
 
-public class ScoreManager{
+public class MusicManager{
 
     private Database db;
     
 
-    //Inicializador, onde pega a instância do db e inicializa a tabela score
-    public ScoreManager(){
+    //Inicializador, onde pega a instância do dbe inicializa a tabela music
+    public MusicManager(){
         this.db = Database.getInstance();
         initializer();
     }
 
     //cria um usuário na tabela do db
-    public int add_score(Score score){
-
-        String sql = "INSERT INTO scores (userId, score)" 
+    public int add_music(Music music){
+            
+        String sql = "INSERT INTO musics (name, link, gamename, genre, launchyear)" 
         + "VALUES"
-	    + "(?,?) "
+	    + "(?,?,?,?,?) "
         + "RETURNING id";
 
         try{
             PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
-            pstmt.setInt(1, score.getUserId());
-            pstmt.setDouble(2, score.getScore());
+            pstmt.setString(1, music.getName());
+            pstmt.setString(2, music.getLink());
+            pstmt.setString(3, music.getGameName());
+            pstmt.setString(4, music.getGenre());
+            pstmt.setInt(5, music.getLaunchYear());
             
             ResultSet rs = pstmt.executeQuery();
 
@@ -40,9 +43,9 @@ public class ScoreManager{
     }
 
     //Pega os dados do usuários pelo id e retorna um objeto daquele tipo
-    public Score read_score(int id){
-        Score score = new Score(id, 0, 0.0);
-        String sql = "SELECT userId, score FROM scores WHERE id = ?";
+    public Music read_music(int id){
+        Music music = new Music(id, "", "", "", "",-1);
+        String sql = "SELECT name, link, gamename, genre, launchyear FROM musics WHERE id = ?";
 
         try{
             PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
@@ -50,8 +53,11 @@ public class ScoreManager{
 
             ResultSet rs = pstmt.executeQuery();
             
-            score.setScore(rs.getDouble("score"));
-            score.setUserId(rs.getInt("userId"));
+            music.setName(rs.getString("name"));
+            music.setLink(rs.getString("link"));
+            music.setGameName(rs.getString("gamename"));
+            music.setGenre(rs.getString("genre"));
+            music.setLaunchYear(rs.getInt("launchyear"));
 
             pstmt.close();
             rs.close();
@@ -60,20 +66,23 @@ public class ScoreManager{
             e.printStackTrace();
         }
         
-        return score;
+        return music;
 
     }
 
     //Altera os dados do usuário pelo id, onde se não quiser alterar um dos dados é só passar uma string vazia
-    public void update_score(Score score){
+    public void update_music(Music music){
 
-        String sql = "UPDATE scores SET userId = ?, score = ? WHERE id = ?";
+        String sql = "UPDATE musics SET name = ?, link = ?, gamename = ?, genre = ?, launchyear = ? WHERE id = ?";
 
         try{
                 PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
-                pstmt.setInt(1, score.getUserId());
-                pstmt.setDouble(2, score.getScore());
-                pstmt.setInt(3, score.getId());
+                pstmt.setString(1, music.getName());
+                pstmt.setString(2, music.getLink());
+                pstmt.setString(3, music.getGameName());
+                pstmt.setString(4, music.getGenre());
+                pstmt.setInt(5, music.getLaunchYear());
+                pstmt.setInt(6, music.getId());
                 pstmt.executeUpdate();
                 pstmt.close();
 
@@ -84,7 +93,7 @@ public class ScoreManager{
 
     //Deleta o usuário pelo id
     public void delete(int id){
-        String sql = "DELETE FROM scores WHERE id = ?";
+        String sql = "DELETE FROM musics WHERE id = ?";
 
             try{
                 PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
@@ -98,11 +107,12 @@ public class ScoreManager{
     }
 
    //Deleta o usuário pelo id
-    public void delete(Score score){
-        String sql = "DELETE FROM scores WHERE id = ?";
+    public void delete(Music music){
+        String sql = "DELETE FROM musics WHERE id = ?";
+
             try{
                 PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
-                pstmt.setInt(1, score.getId());
+                pstmt.setInt(1, music.getId());
                 pstmt.executeUpdate();
                 pstmt.close();
 
@@ -113,11 +123,13 @@ public class ScoreManager{
 
     //Inicializador da tabela dos usuários, executado pelo db
     private void initializer(){
-        String sql = "CREATE TABLE IF NOT EXISTS scores ("
+        String sql = "CREATE TABLE IF NOT EXISTS musics ("
         + "	id INTEGER PRIMARY KEY AUTOINCREMENT,"
-        + "	userId INTEGER NOT NULL,"
-        + "	score REAL NOT NULL,"
-        + " FOREIGN KEY(userId) REFERENCES users(id)"
+        + "	name text NOT NULL,"
+        + "	link text NOT NULL,"
+        + " gamename text NOT NULL,"
+        + " genre text NOT NULL,"
+        + " launchyear INTEGER NOT NULL"
         + ")";
 
         db.execute(sql);

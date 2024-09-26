@@ -8,6 +8,7 @@ public class main {
 
         UserManager users = new UserManager();
         ScoreManager scores = new ScoreManager();
+        MusicManager musics = new MusicManager();
 
         User userA = new User(0, "WesleySilva", "wesley.abc@hotmail.com", "Abcdefg1!");
         int id = users.add_user(userA);
@@ -16,6 +17,11 @@ public class main {
         Score scoreA = new Score(0, 1, 9999.0);
         id = scores.add_score(scoreA);
         scoreA.setId(id);
+
+        Music musicA = new Music(0, "One Winged Angel", "youtube.com/mmYdf0yqK_Fc", "Final Fantasy VII", "RPG", 1997);
+        id = musics.add_music(musicA);
+        musicA.setId(id);
+
         //users.add_user("WesleySilva", "wesley.abc@hotmail.com", "Abcdefg1!");  //Válido
         //users.add_user("ZeAlysson", "ze.aly@hotmail.com", "Senha@123");  //Válido
         //users.add_user("Ze", "ze@hotmail.com", "Senha@123");  //Válido
@@ -71,6 +77,11 @@ public class main {
         for(int i = 1; i <2; i ++){
             Score score = scores.read_score(i);
             System.out.println(i + " " + score.getUserId() + " " + score.getScore());
+        }
+
+        for(int i = 1; i <2; i ++){
+            Music music = musics.read_music(i);
+            System.out.println(i + " " + music.getName() + " " + music.getLink() + " " + music.getGameName() + " " + music.getGenre() + " " + music.getLaunchYear());
         }
 
     }

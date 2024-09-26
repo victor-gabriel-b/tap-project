@@ -1,15 +1,16 @@
-import java.util.ArrayList;
 
 public class Music{
 
+    private int id;
     private String link;
     private String name;
     private String gameName;
-    private ArrayList<String> genre;
+    private String genre;
     private int launchYear;
 
-    public Music(String link, String name, String gameName, ArrayList<String> genre, int launchYear){
+    public Music(int id, String name, String link, String gameName, String genre, int launchYear){
 
+        this.id = id;
         this.link = link;
         this.name = name;
         this.gameName = gameName;
@@ -19,6 +20,14 @@ public class Music{
     }
 
     //Getters and Setters
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getLink() {
         return link;
@@ -44,11 +53,11 @@ public class Music{
         this.gameName = gameName;
     }
 
-    public ArrayList<String> getGenre() {
+    public String getGenre() {
         return genre;
     }
 
-    public void setGenre(ArrayList<String> genre) {
+    public void setGenre(String genre) {
         this.genre = genre;
     }
 

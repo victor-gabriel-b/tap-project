@@ -36,10 +36,10 @@ public class UserManager{
             
             ResultSet rs = pstmt.executeQuery();
 
-            int fodase = rs.getInt("id");
+            int id = rs.getInt("id");
             pstmt.close();
             rs.close();
-            return fodase;
+            return id;
             
 
         } catch(SQLException e){
@@ -49,7 +49,7 @@ public class UserManager{
         return -1;
     }
 
-    //Pega os dados do usuários pelo id e retorna eles em forma de ArrayList, onde 0 é username, 1 é email e 2 é password
+    //Pega os dados do usuários pelo id e retorna um objeto daquele tipo
     public User read_user(int id){
         User user = new User(id, "", "", "");
         String sql = "SELECT username, email, password FROM users WHERE id = ?";
@@ -73,6 +73,31 @@ public class UserManager{
         
         return user;
 
+    }
+
+    public User read_username(String username){
+        User user = new User(-1, username, "", "");
+        String sql = "SELECT id, email, password FROM users WHERE username = ?";
+
+        try{
+            PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
+            pstmt.setString(1, username);
+
+            ResultSet rs = pstmt.executeQuery();
+            
+            user.setId(rs.getInt("id"));
+            user.setEmail(rs.getString("email"));
+            user.setPassword(rs.getString("password"));
+
+            pstmt.close();
+            rs.close();
+
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        return user;
+    
     }
 
     //Altera os dados do usuário pelo id, onde se não quiser alterar um dos dados é só passar uma string vazia

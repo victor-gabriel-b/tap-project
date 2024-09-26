@@ -1,8 +1,6 @@
-// Library to make the verification easier
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// Exception for Invalid Login
 class InvalidLoginException extends Exception {
 
     public InvalidLoginException(String message) {
@@ -13,7 +11,7 @@ class InvalidLoginException extends Exception {
 
 public class LoginValidation {
     
-    // This function was made to verify the data of the login and password. The mensages from the Exceptions are in Brazilian Portuguese language. Because the app is going to be inicially for the brazilian clients
+    
     public boolean userValidation(String username, String password) throws InvalidLoginException {
         
         if (username == null || username.isEmpty()) {
@@ -77,7 +75,7 @@ public class LoginValidation {
         return true;
     }
     
-    // Method to verify if the password contains at least one uppercase letter
+
     private static boolean containsUpperCase(String str) {
 
         for (char c : str.toCharArray()) {
@@ -92,7 +90,7 @@ public class LoginValidation {
         return false;
     }
 
-    // Method to verify if the password countains at least one lowercase letter
+
     private static boolean containsLowerCase(String str) {
 
         for (char c : str.toCharArray()) {
@@ -108,7 +106,7 @@ public class LoginValidation {
 
     }
 
-    // Method to verify if the string(password) countains at least one number
+
     private static boolean containsDigit(String str) {
 
         for (char c : str.toCharArray()) {
@@ -124,7 +122,7 @@ public class LoginValidation {
         
     }
 
-    // Method to verify if the password at least one special character
+
     private static boolean containsSpecialCharacter(String str) {
 
         Pattern specialChars = Pattern.compile("[!@#$%^&*(),.?\":{}|<>]");

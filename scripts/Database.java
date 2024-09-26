@@ -3,15 +3,13 @@ import java.sql.*;
 
 public class Database{
     
-    private ArrayList<String> users;
+    // A conexão é inicializada na primeira tentativa de acesso ao usuario
     private Connection connection;
 
     private static Database instance;
 
     private Database(){
-        this.connection = this.getConnection();
-
-        this.users = new ArrayList<>();
+        getConnection();
     }
 
     public static synchronized Database getInstance(){
@@ -19,20 +17,26 @@ public class Database{
         if (instance == null){
             instance = new Database();
         }
+
         return instance;
     }
 
     public Connection getConnection(){
-        try {
-            // Cria a conexão com o banco de dados
-            Connection a = DriverManager.getConnection("jdbc:sqlite:base.db");
-            return a;
-        }
-        catch (SQLException e){
-           System.exit(0);
+        // Caso já tenha, não tentar criar de novo
+        if (this.connection == null){
+            try {
+               // Cria a conexão com o banco de dados
+               Connection a = DriverManager.getConnection("jdbc:sqlite:base.db");
+               System.out.println("Connected successfully");
+               this.connection = a;
+           }
+           catch (SQLException e){
+               System.out.println("Connection Error");
+               //e.printStackTrace();
+           }
         }
 
-        return null;
+        return this.connection;
     }
 
     public void execute(String sql){
@@ -78,6 +82,7 @@ public class Database{
     }
     */
 
+    /*
 
     public void read(int id){
 
@@ -95,7 +100,9 @@ public class Database{
     public int getLenght(){
         
         return this.users.size();
+
     }
         
+    */
     
 }

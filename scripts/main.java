@@ -7,11 +7,15 @@ public class main {
 
 
         UserManager users = new UserManager();
-
+        ScoreManager scores = new ScoreManager();
 
         User userA = new User(0, "WesleySilva", "wesley.abc@hotmail.com", "Abcdefg1!");
         int id = users.add_user(userA);
         userA.setId(id);
+
+        Score scoreA = new Score(0, 1, 9999.0);
+        id = scores.add_score(scoreA);
+        scoreA.setId(id);
         //users.add_user("WesleySilva", "wesley.abc@hotmail.com", "Abcdefg1!");  //Válido
         //users.add_user("ZeAlysson", "ze.aly@hotmail.com", "Senha@123");  //Válido
         //users.add_user("Ze", "ze@hotmail.com", "Senha@123");  //Válido
@@ -42,6 +46,7 @@ public class main {
         #.add_user("ZeAlysson", "ze.alysson@hotmail.com", "Senha123456789!")  # Erro: A senha deve ter no máximo 12 caracteres.
         */
 
+        /* 
         for(int i = 1; i <2; i ++){
             User user = users.read_user(i);
             System.out.println(i + " " + user.getUsername() + " " + user.getEmail()+ " " + user.getPassword());
@@ -61,5 +66,12 @@ public class main {
             User user = users.read_user(i);
             System.out.println(i + " " + user.getUsername() + " " + user.getEmail()+ " " + user.getPassword());
         }
+        */
+
+        for(int i = 1; i <2; i ++){
+            Score score = scores.read_score(i);
+            System.out.println(i + " " + score.getUserId() + " " + score.getScore());
+        }
+
     }
 }

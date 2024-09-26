@@ -1,32 +1,40 @@
 public class Score{
 
-    private String nickname;
-    private float score;
+    private int id;
+    private int userId;
+    private Double score;
 
-    public Score(String nickname, float score){
-        this.nickname = nickname;
+    public Score(int id, int userId, Double score){
+        this.userId = userId;
         this.score = score;
+        this.id = id;
         
     }
 
-    public float getScore(){
+    public Double getScore(){
         return this.score;
     }
 
-    public void setScore(float score){
+    public void setScore(Double score){
         this.score = score;
     }
 
-    public String getNickname(){
-        return this.nickname;
+    public int getUserId(){
+        return this.userId;
     }
 
-    public void setNickname(String nickname){
-        this.nickname = nickname;
+    public void setUserId(int userId){
+        this.userId = userId;
 
     }
 
-
+    public void setId(int id){
+        this.id = id;
+    }   
+        
+    public int getId(){
+        return this.id;
+    }
 
 
     

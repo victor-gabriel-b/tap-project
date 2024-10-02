@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.time.ZonedDateTime;
 
 public class main {
     
@@ -6,15 +6,19 @@ public class main {
     public static void main(String[] args) {
 
 
-        UserManager users = new UserManager();
-        ScoreManager scores = new ScoreManager();
-        MusicManager musics = new MusicManager();
+        var users = new UserManager();
+        var scores = new ScoreManager();
+        var musics = new MusicManager();
+        var logins = new LoginManager();
 
-        User userA = new User(0, "WesleySilva", "wesley.abc@hotmail.com", "Abcdefg1!");
+    
+
+
+        var userA = new User(0, "WesleySilva", "wesley.abc@hotmail.com", "Abcdefg1!");
         int id = users.add_user(userA);
         userA.setId(id);
 
-        Score scoreA = new Score(0, 1, 9999.0);
+        var scoreA = new Score(0, 1, 9999.0);
         id = scores.add_score(scoreA);
         scoreA.setId(id);
 
@@ -83,6 +87,21 @@ public class main {
             Music music = musics.read_music(i);
             System.out.println(i + " " + music.getName() + " " + music.getLink() + " " + music.getGameName() + " " + music.getGenre() + " " + music.getLaunchYear());
         }
+
+
+        ZonedDateTime dataHora;
+        var loginA = new Login(0, 1, dataHora = ZonedDateTime.now());
+        id = logins.add_login(loginA);
+        loginA.setId(id);
+
+        logins.delete(6);
+
+
+        HtmlReport report = new HtmlReport();
+        CsvReport report2 = new CsvReport();
+        
+        report.generateReport();
+        report2.generateReport();
 
     }
 }

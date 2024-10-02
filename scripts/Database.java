@@ -40,7 +40,7 @@ public class Database{
 
     public void execute(String sql){
         try {
-            Statement stmt = this.connection.createStatement();
+            Statement stmt = getConnection().createStatement();
             stmt.execute(sql);
         }
         catch (SQLException e) {

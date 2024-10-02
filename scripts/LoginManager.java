@@ -1,28 +1,30 @@
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-public class ScoreManager{
-
-    private Database db;
+public class LoginManager {
     
+    private Database db;
 
-    //Inicializador, onde pega a instância do db e inicializa a tabela score
-    public ScoreManager(){
-        this.db = Database.getInstance();
+    public LoginManager(){
+        db = Database.getInstance();
         initializer();
+
     }
 
-    //cria um score na tabela do db
-    public int add_score(Score score){
+    //cria um login na tabela do db
+    public int add_login(Login login){
 
-        String sql = "INSERT INTO scores (userId, score)" 
+
+        String sql = "INSERT INTO logins (userId, dataHora)" 
         + "VALUES"
 	    + "(?,?) "
         + "RETURNING id";
 
         try{
             PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
-            pstmt.setInt(1, score.getUserId());
-            pstmt.setDouble(2, score.getScore());
+            pstmt.setInt(1, login.getUserId());
+            pstmt.setString(2, login.getStringDataHora());
             
             ResultSet rs = pstmt.executeQuery();
 
@@ -39,10 +41,12 @@ public class ScoreManager{
         return -1;
     }
 
-    //Pega os dados do score pelo id e retorna um objeto daquele tipo
-    public Score read_score(int id){
-        Score score = new Score(id, 0, 0.0);
-        String sql = "SELECT userId, score FROM scores WHERE id = ?";
+    //Pega os dados do login pelo id e retorna um objeto daquele tipo
+    public Login read_login(int id){
+        var login = new Login(id, -1, null);
+        String sql = "SELECT userId, dataHora FROM logins WHERE id = ?";
+
+
 
         try{
             PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
@@ -50,8 +54,8 @@ public class ScoreManager{
 
             ResultSet rs = pstmt.executeQuery();
             
-            score.setScore(rs.getDouble("score"));
-            score.setUserId(rs.getInt("userId"));
+            login.setStringDataHora(rs.getString("dataHora"));
+            login.setUserId(rs.getInt("userId"));
 
             pstmt.close();
             rs.close();
@@ -60,20 +64,20 @@ public class ScoreManager{
             e.printStackTrace();
         }
         
-        return score;
+        return login;
 
     }
 
-    //Altera os dados do score pelo id, onde se não quiser alterar um dos dados é só passar uma string vazia
-    public void update_score(Score score){
+    //Altera os dados do login pelo id, onde se não quiser alterar um dos dados é só passar uma string vazia
+    public void update_login(Login login){
 
-        String sql = "UPDATE scores SET userId = ?, score = ? WHERE id = ?";
+        String sql = "UPDATE logins SET userId = ?, score = ? WHERE id = ?";
 
         try{
                 PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
-                pstmt.setInt(1, score.getUserId());
-                pstmt.setDouble(2, score.getScore());
-                pstmt.setInt(3, score.getId());
+                pstmt.setInt(1, login.getUserId());
+                pstmt.setString(2, login.getStringDataHora());
+                pstmt.setInt(3, login.getId());
                 pstmt.executeUpdate();
                 pstmt.close();
 
@@ -82,9 +86,9 @@ public class ScoreManager{
         }
     }
 
-    //Deleta o score pelo id
+    //Deleta o login pelo id
     public void delete(int id){
-        String sql = "DELETE FROM scores WHERE id = ?";
+        String sql = "DELETE FROM logins WHERE id = ?";
 
             try{
                 PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
@@ -97,12 +101,12 @@ public class ScoreManager{
             }
     }
 
-   //Deleta o score pelo id
-    public void delete(Score score){
-        String sql = "DELETE FROM scores WHERE id = ?";
+   //Deleta o login pelo id
+    public void delete(Login login){
+        String sql = "DELETE FROM logins WHERE id = ?";
             try{
                 PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
-                pstmt.setInt(1, score.getId());
+                pstmt.setInt(1, login.getId());
                 pstmt.executeUpdate();
                 pstmt.close();
 
@@ -111,19 +115,18 @@ public class ScoreManager{
             }
     }
 
-    //Inicializador da tabela dos usuários, executado pelo db
+
     private void initializer(){
-        String sql = "CREATE TABLE IF NOT EXISTS scores ("
+        String sql = "CREATE TABLE IF NOT EXISTS logins ("
         + "	id INTEGER PRIMARY KEY AUTOINCREMENT,"
         + "	userId INTEGER NOT NULL,"
-        + "	score REAL NOT NULL,"
+        + "	dataHora text NOT NULL,"
         + " FOREIGN KEY(userId) REFERENCES users(id)"
         + ")";
 
         db.execute(sql);
 
     }
-    
 
 
 }

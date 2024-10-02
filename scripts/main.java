@@ -5,11 +5,19 @@ public class main {
 
     public static void main(String[] args) {
 
+<<<<<<< HEAD
 
         var users = new UserManager();
         var scores = new ScoreManager();
         var musics = new MusicManager();
         var logins = new LoginManager();
+=======
+        DatabaseFacade dbf = DatabaseFacade.getInstance();
+        
+        UserManager users = dbf.getUserManager();
+        ScoreManager scores = dbf.getScoreManager();
+        MusicManager musics = dbf.getMusicManager();
+>>>>>>> 42e7e0003c41cf9e2a5be72452cf6838a87214d8
 
     
 
@@ -18,9 +26,27 @@ public class main {
         int id = users.add_user(userA);
         userA.setId(id);
 
+<<<<<<< HEAD
         var scoreA = new Score(0, 1, 9999.0);
+=======
+        User userB = new User(0, "WisePedrosa", "wise@it.a.coisa.com", "PAOFR@ANC3S");
+        id = users.add_user(userB);
+        userB.setId(id);
+
+        Score scoreA = new Score(0, 1, 5000.0);
+>>>>>>> 42e7e0003c41cf9e2a5be72452cf6838a87214d8
         id = scores.add_score(scoreA);
         scoreA.setId(id);
+
+        Score scoreB = new Score(0, 1, 999.0);
+        id = scores.add_score(scoreB);
+        scoreB.setId(id);
+    
+        Score scoreC = new Score(0, 2, 999.0);
+        id = scores.add_score(scoreC);
+        scoreC.setId(id);
+
+        dbf.addScoreFromUser(userB, 3.0);
 
         Music musicA = new Music(0, "One Winged Angel", "youtube.com/mmYdf0yqK_Fc", "Final Fantasy VII", "RPG", 1997);
         id = musics.add_music(musicA);
@@ -77,7 +103,7 @@ public class main {
             System.out.println(i + " " + user.getUsername() + " " + user.getEmail()+ " " + user.getPassword());
         }
         */
-
+/* 
         for(int i = 1; i <2; i ++){
             Score score = scores.read_score(i);
             System.out.println(i + " " + score.getUserId() + " " + score.getScore());
@@ -86,6 +112,13 @@ public class main {
         for(int i = 1; i <2; i ++){
             Music music = musics.read_music(i);
             System.out.println(i + " " + music.getName() + " " + music.getLink() + " " + music.getGameName() + " " + music.getGenre() + " " + music.getLaunchYear());
+        }
+*/
+        ArrayList<Score> scores_user = dbf.getScoresByUsername("WisePedrosa");
+        for(int i = 0; i < scores_user.size(); i++){
+            
+            Score score = scores_user.get(i);
+            System.out.println(i + " " + score.getUserId() + " " + score.getScore());
         }
 
 

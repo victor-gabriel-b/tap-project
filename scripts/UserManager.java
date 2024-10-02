@@ -146,7 +146,7 @@ public class UserManager{
             } catch (SQLException e){
                 e.printStackTrace();
             }
-    }
+    }  
 
     //Inicializador da tabela dos usuários, executado pelo db
     private void initializer(){

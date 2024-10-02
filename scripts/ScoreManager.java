@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.ArrayList;
 
 public class ScoreManager{
 
@@ -109,6 +110,38 @@ public class ScoreManager{
             } catch (SQLException e){
                 e.printStackTrace();
             }
+    }
+
+    public ArrayList<Score> getScoresByUserId(int id){
+        ArrayList<Score> scores = new ArrayList<Score>();
+
+        String sql = "SELECT userId, score FROM scores WHERE userId = ?";
+
+        Score score;
+
+        try{
+            PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
+            pstmt.setInt(1, id);
+
+            ResultSet rs = pstmt.executeQuery();
+            
+            while (rs.next()) {
+                score = new Score(id, 0, 0.0);
+                
+                score.setScore(rs.getDouble("score"));
+                score.setUserId(rs.getInt("userId")); 
+                
+                scores.add(score);
+            }
+
+            pstmt.close();
+            rs.close();
+
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        return scores;        
     }
 
     //Inicializador da tabela dos usuários, executado pelo db

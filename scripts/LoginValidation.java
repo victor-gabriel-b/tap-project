@@ -9,7 +9,10 @@ class InvalidLoginException extends Exception {
 
 public class LoginValidation {
     
+<<<<<<< HEAD
     
+=======
+>>>>>>> 42e7e0003c41cf9e2a5be72452cf6838a87214d8
     public boolean userValidation(String username, String password) throws InvalidLoginException {
         
         // Verificação para null ou strings vazias
@@ -67,6 +70,10 @@ public class LoginValidation {
         return true;
     }
     
+<<<<<<< HEAD
+=======
+    //verificar se a senha contém pelo menos uma letra maiúscula
+>>>>>>> 42e7e0003c41cf9e2a5be72452cf6838a87214d8
     private static boolean containsUpperCase(String str) {
         for (char c : str.toCharArray()) {
             if (Character.isUpperCase(c)) {
@@ -76,6 +83,10 @@ public class LoginValidation {
         return false;
     }
 
+<<<<<<< HEAD
+=======
+    //verificar se a senha contém pelo menos uma letra minúscula
+>>>>>>> 42e7e0003c41cf9e2a5be72452cf6838a87214d8
     private static boolean containsLowerCase(String str) {
         for (char c : str.toCharArray()) {
             if (Character.isLowerCase(c)) {
@@ -85,6 +96,10 @@ public class LoginValidation {
         return false;
     }
 
+<<<<<<< HEAD
+=======
+    //verificar se a senha contém pelo menos um número
+>>>>>>> 42e7e0003c41cf9e2a5be72452cf6838a87214d8
     private static boolean containsDigit(String str) {
         for (char c : str.toCharArray()) {
             if (Character.isDigit(c)) {
@@ -94,6 +109,10 @@ public class LoginValidation {
         return false;
     }
 
+<<<<<<< HEAD
+=======
+    //verificar se a senha contém pelo menos um caractere especial
+>>>>>>> 42e7e0003c41cf9e2a5be72452cf6838a87214d8
     private static boolean containsSpecialCharacter(String str) {
         Pattern specialChars = Pattern.compile("[!@#$%^&*(),.?\":{}|<>]");
         Matcher hasSpecial = specialChars.matcher(str);

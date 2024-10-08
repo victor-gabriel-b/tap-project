@@ -1,6 +1,10 @@
+package manager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import entity.Login;
+import infra.Database;
 
 public class LoginManager {
     

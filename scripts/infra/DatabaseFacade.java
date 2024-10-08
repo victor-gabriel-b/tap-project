@@ -1,5 +1,13 @@
+package infra;
 import java.sql.Connection;
 import java.util.ArrayList;
+
+import entity.Score;
+import entity.User;
+import manager.LoginManager;
+import manager.MusicManager;
+import manager.ScoreManager;
+import manager.UserManager;
 
 public class DatabaseFacade {
     // A conexão é inicializada na primeira tentativa de acesso ao usuario

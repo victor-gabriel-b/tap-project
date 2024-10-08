@@ -1,4 +1,8 @@
+package manager;
 import java.sql.*;
+
+import entity.Music;
+import infra.Database;
 
 public class MusicManager{
 

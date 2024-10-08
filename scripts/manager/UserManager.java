@@ -1,4 +1,9 @@
+package manager;
 import java.sql.*;
+
+import entity.User;
+import infra.Database;
+import validation.LoginValidation;
 
 public class UserManager{
 

@@ -1,6 +1,18 @@
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
+import entity.Login;
+import entity.Music;
+import entity.Score;
+import entity.User;
+import infra.DatabaseFacade;
+import manager.LoginManager;
+import manager.MusicManager;
+import manager.ScoreManager;
+import manager.UserManager;
+import report.CsvReport;
+import report.HtmlReport;
+
 public class main {
     public static void main(String[] args) {
 

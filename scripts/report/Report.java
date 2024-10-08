@@ -1,7 +1,12 @@
+package report;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import entity.Login;
+import infra.Database;
+import manager.LoginManager;
 
 public abstract class Report {
 

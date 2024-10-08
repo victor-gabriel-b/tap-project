@@ -1,5 +1,9 @@
+package manager;
 import java.sql.*;
 import java.util.ArrayList;
+
+import entity.Score;
+import infra.Database;
 
 public class ScoreManager{
 

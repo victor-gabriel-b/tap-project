@@ -8,11 +8,13 @@ public class DatabaseFacade {
     private UserManager userManager;
     private MusicManager musicManager;
     private ScoreManager scoreManager;
+    private LoginManager loginManager;
 
     private DatabaseFacade(){
         this.userManager = new UserManager();
         this.musicManager = new MusicManager();
         this.scoreManager = new ScoreManager();
+        this.loginManager = new LoginManager();
     }
 
     public static synchronized DatabaseFacade getInstance(){
@@ -34,6 +36,10 @@ public class DatabaseFacade {
 
     public ScoreManager getScoreManager(){
         return this.scoreManager;
+    }
+
+    public LoginManager getLoginManager(){
+        return this.loginManager;
     }
 
     public ArrayList<Score> getScoresByUsername(String username){

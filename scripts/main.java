@@ -1,24 +1,15 @@
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 
 public class main {
-    
-
     public static void main(String[] args) {
 
-<<<<<<< HEAD
-
-        var users = new UserManager();
-        var scores = new ScoreManager();
-        var musics = new MusicManager();
-        var logins = new LoginManager();
-=======
         DatabaseFacade dbf = DatabaseFacade.getInstance();
         
         UserManager users = dbf.getUserManager();
         ScoreManager scores = dbf.getScoreManager();
         MusicManager musics = dbf.getMusicManager();
->>>>>>> 42e7e0003c41cf9e2a5be72452cf6838a87214d8
-
+        LoginManager logins = dbf.getLoginManager();
     
 
 
@@ -26,15 +17,11 @@ public class main {
         int id = users.add_user(userA);
         userA.setId(id);
 
-<<<<<<< HEAD
-        var scoreA = new Score(0, 1, 9999.0);
-=======
-        User userB = new User(0, "WisePedrosa", "wise@it.a.coisa.com", "PAOFR@ANC3S");
+        User userB = new User(0, "WisePedrosa", "wise@it.a.coisa.com", "PAoFR@ANC3S");
         id = users.add_user(userB);
         userB.setId(id);
 
         Score scoreA = new Score(0, 1, 5000.0);
->>>>>>> 42e7e0003c41cf9e2a5be72452cf6838a87214d8
         id = scores.add_score(scoreA);
         scoreA.setId(id);
 

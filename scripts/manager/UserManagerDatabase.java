@@ -3,16 +3,17 @@ import java.sql.*;
 
 import entity.User;
 import infra.Database;
+import manager.interfaces.UserManager;
 import validation.LoginValidation;
 
-public class UserManager{
+public class UserManagerDatabase implements UserManager {
 
     private Database db;
     private LoginValidation lv;
     
 
     //Inicializador, onde pega a instância do db, cria uma instância da classe LoginValidation e inicializa a tabela usuário
-    public UserManager(){
+    public UserManagerDatabase(){
         this.db = Database.getInstance();
         this.lv = new LoginValidation();
         initializer();

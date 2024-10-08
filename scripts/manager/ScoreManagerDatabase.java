@@ -4,14 +4,15 @@ import java.util.ArrayList;
 
 import entity.Score;
 import infra.Database;
+import manager.interfaces.ScoreManager;
 
-public class ScoreManager{
+public class ScoreManagerDatabase implements ScoreManager {
 
     private Database db;
     
 
     //Inicializador, onde pega a instância do db e inicializa a tabela score
-    public ScoreManager(){
+    public ScoreManagerDatabase(){
         this.db = Database.getInstance();
         initializer();
     }

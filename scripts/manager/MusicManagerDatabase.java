@@ -3,14 +3,15 @@ import java.sql.*;
 
 import entity.Music;
 import infra.Database;
+import manager.interfaces.MusicManager;
 
-public class MusicManager{
+public class MusicManagerDatabase implements MusicManager{
 
     private Database db;
     
 
     //Inicializador, onde pega a instância do dbe inicializa a tabela music
-    public MusicManager(){
+    public MusicManagerDatabase(){
         this.db = Database.getInstance();
         initializer();
     }

@@ -6,10 +6,7 @@ import entity.Music;
 import entity.Score;
 import entity.User;
 import infra.DatabaseFacade;
-import manager.LoginManager;
-import manager.MusicManager;
-import manager.ScoreManager;
-import manager.UserManager;
+import manager.interfaces.*;;
 import report.CsvReport;
 import report.HtmlReport;
 
@@ -23,8 +20,6 @@ public class main {
         MusicManager musics = dbf.getMusicManager();
         LoginManager logins = dbf.getLoginManager();
     
-
-
         var userA = new User(0, "WesleySilva", "wesley.abc@hotmail.com", "Abcdefg1!");
         int id = users.add_user(userA);
         userA.setId(id);

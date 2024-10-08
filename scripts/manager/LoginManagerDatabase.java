@@ -5,12 +5,13 @@ import java.sql.SQLException;
 
 import entity.Login;
 import infra.Database;
+import manager.interfaces.LoginManager;
 
-public class LoginManager {
+public class LoginManagerDatabase implements LoginManager {
     
     private Database db;
 
-    public LoginManager(){
+    public LoginManagerDatabase(){
         db = Database.getInstance();
         initializer();
 
@@ -75,7 +76,7 @@ public class LoginManager {
     //Altera os dados do login pelo id, onde se não quiser alterar um dos dados é só passar uma string vazia
     public void update_login(Login login){
 
-        String sql = "UPDATE logins SET userId = ?, score = ? WHERE id = ?";
+        String sql = "UPDATE logins SET userId = ?, dataHora = ? WHERE id = ?";
 
         try{
                 PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
@@ -105,7 +106,7 @@ public class LoginManager {
             }
     }
 
-   //Deleta o login pelo id
+   //Deleta o login pelo login
     public void delete(Login login){
         String sql = "DELETE FROM logins WHERE id = ?";
             try{

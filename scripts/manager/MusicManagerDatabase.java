@@ -111,7 +111,7 @@ public class MusicManagerDatabase implements MusicManager{
             }
     }
 
-   //Deleta o usuário pelo id
+   //Deleta musica pelo id
     public void delete(Music music){
         String sql = "DELETE FROM musics WHERE id = ?";
 

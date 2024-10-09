@@ -2,66 +2,62 @@ package validation;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class InvalidLoginException extends Exception {
-    public InvalidLoginException(String message) {
-        super(message);
-    }
-}
+import entity.User;
 
 public class LoginValidation {
     
-    public boolean userValidation(String username, String password) throws InvalidLoginException {
+    public boolean userValidation(String username, String password) throws UsernameInvalidException, PasswordInvalidException {
         
         // Verificação para null ou strings vazias
         if (username == null || username.isEmpty()) {
-            throw new InvalidLoginException("O login não pode ser vazio.");
+            throw new UsernameInvalidException("O login não pode ser vazio.");
         }
         
         if (username.length() > 12) {
-            throw new InvalidLoginException("O login deve ter no máximo 12 caracteres.");
+            throw new UsernameInvalidException("O login deve ter no máximo 12 caracteres.");
         }
         
         // Verificar se o login contém espaços ou números
         for (int i = 0; i < username.length(); i++) {
             if (Character.isWhitespace(username.charAt(i))) {
-                throw new InvalidLoginException("O login não pode conter espaços.");
+                throw new UsernameInvalidException("O login não pode conter espaços.");
             }
             
             if (Character.isDigit(username.charAt(i))) {
-                throw new InvalidLoginException("O login não pode conter números.");
+                throw new UsernameInvalidException("O login não pode conter números.");
             }
         }
         
         if (password == null) {
-            throw new InvalidLoginException("A senha não pode ser nula.");
+            throw new PasswordInvalidException("A senha não pode ser nula.");
         }
         
         if (password.length() > 128) {
-            throw new InvalidLoginException("A senha deve ter no máximo 128 caracteres.");
+            throw new PasswordInvalidException("A senha deve ter no máximo 128 caracteres.");
         }
         
         if (password.length() < 8) {
-            throw new InvalidLoginException("A senha deve ter no mínimo 8 caracteres.");
+            throw new PasswordInvalidException("A senha deve ter no mínimo 8 caracteres.");
         }
         
         if (!containsUpperCase(password)) {
-            throw new InvalidLoginException("A senha deve conter pelo menos uma letra maiúscula.");
+            throw new PasswordInvalidException("A senha deve conter pelo menos uma letra maiúscula.");
         }
         
         if (!containsLowerCase(password)) {
-            throw new InvalidLoginException("A senha deve conter pelo menos uma letra minúscula.");
+            throw new PasswordInvalidException("A senha deve conter pelo menos uma letra minúscula.");
         }
         
         if (!containsDigit(password)) {
-            throw new InvalidLoginException("A senha deve conter pelo menos um número.");
+            throw new PasswordInvalidException("A senha deve conter pelo menos um número.");
         }
         
         if (!containsSpecialCharacter(password)) {
-            throw new InvalidLoginException("A senha deve conter pelo menos um caractere especial.");
+            throw new PasswordInvalidException("A senha deve conter pelo menos um caractere especial.");
         }
         
         if (password.equals(username)) {
-            throw new InvalidLoginException("A senha não pode ser igual ao nome de usuário.");
+            throw new PasswordInvalidException("A senha não pode ser igual ao nome de usuário.");
         }
         
         return true;

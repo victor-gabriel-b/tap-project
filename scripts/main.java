@@ -1,11 +1,11 @@
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
-import entity.*;
-import infra.*;
-import manager.*;
-import report.*;
-import validation.*;
+import entity.Login;
+import entity.Music;
+import entity.Score;
+import entity.User;
+import infra.DatabaseFacade;
 import report.CsvReport;
 import report.HtmlReport;
 
@@ -15,28 +15,29 @@ public class main {
 
         DatabaseFacade dbf = DatabaseFacade.getInstance();
         
-        manager.interfaces.UserManager users = dbf.getUserManager();
+        manager.interfaces.UserManager users;
+        users = dbf.getUserManager();
         manager.interfaces.ScoreManager scores = dbf.getScoreManager();
         manager.interfaces.MusicManager musics = dbf.getMusicManager();
         manager.interfaces.LoginManager logins = dbf.getLoginManager();
     
-        var userA = new User(0, "WesleySilva", "wesley.abc@hotmail.com", "Abcdefg1!");
+        var userA = new entity.User(0, "WesleySilva", "wesley.abc@hotmail.com", "Abcdefg1!");
         int id = users.add_user(userA);
         userA.setId(id);
 
-        User userB = new User(0, "WisePedrosa", "wise@it.a.coisa.com", "PAoFR@ANC3S");
+        User userB = new entity.User(0, "WisePedrosa", "wise@it.a.coisa.com", "PAoFR@ANC3S");
         id = users.add_user(userB);
         userB.setId(id);
 
-        Score scoreA = new Score(0, 1, 5000.0);
+        Score scoreA = new entity.Score(0, 1, 5000.0);
         id = scores.add_score(scoreA);
         scoreA.setId(id);
 
-        Score scoreB = new Score(0, 1, 999.0);
+        Score scoreB = new entity.Score(0, 1, 999.0);
         id = scores.add_score(scoreB);
         scoreB.setId(id);
     
-        Score scoreC = new Score(0, 2, 999.0);
+        Score scoreC = new entity.Score(0, 2, 999.0);
         id = scores.add_score(scoreC);
         scoreC.setId(id);
 

@@ -138,6 +138,7 @@ public class LoginManagerDatabase implements LoginManager {
             id = -1;
         }
         
+        System.out.println(id);
         return id;
     }
 

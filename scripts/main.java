@@ -1,25 +1,24 @@
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
-import entity.Login;
-import entity.Music;
-import entity.Score;
-import entity.User;
-import infra.DatabaseFacade;
-import manager.factory.MemoryManagerFactory;
-import manager.interfaces.*;
+import entity.*;
+import infra.*;
+import manager.*;
+import report.*;
+import validation.*;
 import report.CsvReport;
 import report.HtmlReport;
+
 
 public class main {
     public static void main(String[] args) {
 
         DatabaseFacade dbf = DatabaseFacade.getInstance();
         
-        UserManager users = dbf.getUserManager();
-        ScoreManager scores = dbf.getScoreManager();
-        MusicManager musics = dbf.getMusicManager();
-        LoginManager logins = dbf.getLoginManager();
+        manager.interfaces.UserManager users = dbf.getUserManager();
+        manager.interfaces.ScoreManager scores = dbf.getScoreManager();
+        manager.interfaces.MusicManager musics = dbf.getMusicManager();
+        manager.interfaces.LoginManager logins = dbf.getLoginManager();
     
         var userA = new User(0, "WesleySilva", "wesley.abc@hotmail.com", "Abcdefg1!");
         int id = users.add_user(userA);

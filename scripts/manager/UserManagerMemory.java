@@ -14,7 +14,10 @@ public class UserManagerMemory implements UserManager{
 
     private int lastId = 1;
 
-    public UserManagerMemory(){}
+    public UserManagerMemory(){
+        this.lv = new LoginValidation();
+        this.db = new ArrayList<User>();
+    }
 
     //cria um user na tabela do db
     public int add_user(User user){

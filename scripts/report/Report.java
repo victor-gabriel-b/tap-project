@@ -6,19 +6,20 @@ import java.util.ArrayList;
 
 import entity.Login;
 import infra.Database;
-import manager.LoginManager;
+import infra.DatabaseFacade;
+import manager.interfaces.LoginManager;;
 
 public abstract class Report {
 
     
-    protected Database db;
+    protected DatabaseFacade dbf;
     protected ArrayList<Login> loginList;
     protected LoginManager logins;
     protected int maxId;
 
     private void initializer(){
         this.loginList = new ArrayList<Login>();
-        this.logins = new LoginManager();
+        this.logins = dbf.getLoginManager();
         this.maxId = max();
     }
 
@@ -33,7 +34,7 @@ public abstract class Report {
 
     //conecta com o db
     protected void connect(){
-        this.db = Database.getInstance();
+        this.dbf = DatabaseFacade.getInstance();
     }
 
     //itera sobre i e pega os logins não nulos na tabela logins
@@ -43,6 +44,7 @@ public abstract class Report {
             var login = logins.read_login(i);
 
             if(login.getDataHora() == null){
+                System.out.println("Não encontrado");
                 continue;
             } else {
                 loginList.add(login);
@@ -53,26 +55,7 @@ public abstract class Report {
 
     //pega o valor máximo de id da tabela logins
     protected int max(){
-        String sql = "SELECT id FROM logins ORDER BY id DESC LIMIT 1";
-        int id;
-
-        try{
-            PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
-            ResultSet rs = pstmt.executeQuery();
-
-            id = rs.getInt("id");
-
-            rs.close();
-            pstmt.close();
-
-            
-        } catch(SQLException e){
-            e.printStackTrace();
-            id = -1;
-        }
-        
-
-        return id;
+        return this.logins.maxId();
     }
 
     protected abstract void saveReport();

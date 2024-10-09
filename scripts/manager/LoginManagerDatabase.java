@@ -120,6 +120,26 @@ public class LoginManagerDatabase implements LoginManager {
             }
     }
 
+    public int maxId () {
+        String sql = "SELECT id FROM logins ORDER BY id DESC LIMIT 1";
+        int id;
+
+        try{
+            PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+
+            id = rs.getInt("id");
+
+            rs.close();
+            pstmt.close();
+ 
+        } catch(SQLException e){
+            e.printStackTrace();
+            id = -1;
+        }
+        
+        return id;
+    }
 
     private void initializer(){
         String sql = "CREATE TABLE IF NOT EXISTS logins ("

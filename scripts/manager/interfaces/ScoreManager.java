@@ -1,5 +1,6 @@
 package manager.interfaces;
 
+import java.util.ArrayList;
 import entity.Score;
 
 public interface ScoreManager {
@@ -16,5 +17,7 @@ public interface ScoreManager {
     public void delete(int id);
 
     //Deleta o score pelo score
-    public void delete(Score score);        
+    public void delete(Score score);      
+    
+    public ArrayList<Score> getScoresByUserId(int id);
 }

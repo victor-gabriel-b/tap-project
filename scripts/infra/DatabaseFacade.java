@@ -1,13 +1,11 @@
 package infra;
-import java.sql.Connection;
 import java.util.ArrayList;
 
 import entity.Score;
 import entity.User;
-import manager.LoginManager;
-import manager.MusicManager;
-import manager.ScoreManager;
-import manager.UserManager;
+import manager.interfaces.*;
+import manager.factory.DatabaseManagerFactory;
+import manager.factory.ManagerFactory;
 
 public class DatabaseFacade {
     // A conexão é inicializada na primeira tentativa de acesso ao usuario
@@ -18,17 +16,28 @@ public class DatabaseFacade {
     private ScoreManager scoreManager;
     private LoginManager loginManager;
 
-    private DatabaseFacade(){
-        this.userManager = new UserManager();
-        this.musicManager = new MusicManager();
-        this.scoreManager = new ScoreManager();
-        this.loginManager = new LoginManager();
+    private DatabaseFacade(ManagerFactory factory){
+        this.userManager = factory.createUserManager();
+        this.musicManager = factory.createMusicManager();
+        this.scoreManager = factory.createScoreManager();
+        this.loginManager = factory.createLoginManager();
     }
 
+    // Create the instance if it does not exist. Return it if it does.
     public static synchronized DatabaseFacade getInstance(){
+        if (instance == null){
+            DatabaseManagerFactory factory = new DatabaseManagerFactory();
+            instance = new DatabaseFacade(factory);  // DatabaseManagerFactory is the default Manager factory
+        }
+
+        return instance;
+    }
+
+    // Creates the managers with the desired factory, if it does not exist
+    public static synchronized DatabaseFacade getInstance(ManagerFactory factory){
 
         if (instance == null){
-            instance = new DatabaseFacade();
+            instance = new DatabaseFacade(factory);
         }
 
         return instance;

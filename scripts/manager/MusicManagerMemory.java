@@ -10,7 +10,9 @@ public class MusicManagerMemory implements MusicManager{
     private ArrayList<Music> db;
     private int lastId = 1;
 
-    public MusicManagerMemory(){}
+    public MusicManagerMemory(){
+        this.db = new ArrayList<Music>();
+    }
 
     //cria um music na tabela do db
     public int add_music(Music music){

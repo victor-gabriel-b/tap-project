@@ -17,4 +17,7 @@ public interface LoginManager {
 
     //Deleta o login pelo login
     public void delete(Login login);
+
+    // Retorna o maior Id de login encontrado
+    public int maxId ();
 }

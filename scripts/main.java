@@ -6,7 +6,8 @@ import entity.Music;
 import entity.Score;
 import entity.User;
 import infra.DatabaseFacade;
-import manager.interfaces.*;;
+import manager.factory.MemoryManagerFactory;
+import manager.interfaces.*;
 import report.CsvReport;
 import report.HtmlReport;
 
@@ -121,7 +122,8 @@ public class main {
         id = logins.add_login(loginA);
         loginA.setId(id);
 
-        logins.delete(6);
+
+        logins.delete(id);
 
 
         HtmlReport report = new HtmlReport();

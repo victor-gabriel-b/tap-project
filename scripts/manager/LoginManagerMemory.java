@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 import entity.Login;
+import entity.Score;
 import manager.interfaces.LoginManager;
 
 public class LoginManagerMemory implements LoginManager{
@@ -10,7 +11,9 @@ public class LoginManagerMemory implements LoginManager{
     private ArrayList<Login> db;
     private int lastId = 1;
 
-    public LoginManagerMemory(){}
+    public LoginManagerMemory(){
+        this.db = new ArrayList<Login>();
+    }
 
     //cria um login na tabela do db
     public int add_login(Login login){
@@ -59,5 +62,16 @@ public class LoginManagerMemory implements LoginManager{
     //Deleta o login pelo login
     public void delete(Login login){
         this.db.remove(find_index_by_id(login.getId()));
+    }
+
+    public int maxId () {
+        int maxId = -1;
+        for (Login login : db) {
+            if (login.getId()>maxId){
+                maxId = login.getId();
+            }
+        }
+
+        return maxId;
     }
 }

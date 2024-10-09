@@ -10,7 +10,9 @@ public class ScoreManagerMemory implements ScoreManager{
         private ArrayList<Score> db;
         private int lastId = 1;
 
-        public ScoreManagerMemory(){}
+        public ScoreManagerMemory(){
+            this.db = new ArrayList<Score>();
+        }
 
         //cria um score na tabela do db
         public int add_score(Score score){
@@ -72,5 +74,4 @@ public class ScoreManagerMemory implements ScoreManager{
 
             return scores;
         }
-
 }

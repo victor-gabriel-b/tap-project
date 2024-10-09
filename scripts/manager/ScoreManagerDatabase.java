@@ -149,6 +149,8 @@ public class ScoreManagerDatabase implements ScoreManager {
         return scores;        
     }
 
+
+
     //Inicializador da tabela dos usuários, executado pelo db
     private void initializer(){
         String sql = "CREATE TABLE IF NOT EXISTS scores ("

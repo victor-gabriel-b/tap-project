@@ -3,11 +3,15 @@ import java.util.ArrayList;
 
 import builder.ConcreteUserBuilder;
 import builder.UserDirector;
+import command.Command;
+import command.AddLoginFromUserCommand;
+import command.AddScoreFromUserCommand;
 import entity.Login;
 import entity.Music;
 import entity.Score;
 import entity.User;
 import infra.DatabaseFacade;
+import manager.factory.MemoryManagerFactory;
 import report.CsvReport;
 import report.HtmlReport;
 import observer.MusicObserver;
@@ -50,7 +54,8 @@ public class main {
         id = scores.add_score(scoreC);
         scoreC.setId(id);
 
-        dbf.addScoreFromUser(userB, 3.0);
+        //dbf.addScoreFromUser(userB, 3.0);
+        dbf.execute(new AddScoreFromUserCommand(userB, 3.0));
 
         Music musicA = new Music(0, "One Winged Angel", "youtube.com/mmYdf0yqK_Fc", "Final Fantasy VII", "RPG", 1997);
         id = musics.add_music(musicA);
@@ -63,6 +68,9 @@ public class main {
             User user = users.read_user(i);
             System.out.println(i + " " + user.getUsername() + " " + user.getEmail() + " " + user.getPassword());
         }
+
+        dbf.execute(new AddLoginFromUserCommand(userA));
+
 
         users.delete(userA);
 

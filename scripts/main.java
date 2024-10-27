@@ -23,7 +23,7 @@ import adapter.SpotifyAdapter;
 public class main {
     public static void main(String[] args) {
 
-        DatabaseFacade dbf = DatabaseFacade.getInstance();
+        DatabaseFacade dbf = DatabaseFacade.getInstance(new MemoryManagerFactory());
         
         manager.interfaces.UserManager users;
         users = dbf.getUserManager();
@@ -33,7 +33,7 @@ public class main {
 
         // Adiciona um observer a MusicManager
         MusicObserver musicObserver = new MusicObserver();
-        ((manager.MusicManagerDatabase) musics).addObserver(musicObserver);
+        musics.addObserver(musicObserver);
 
         // Usa o padrao builder para criar objetos do tipo User
         UserDirector userDirector = new UserDirector(new ConcreteUserBuilder());
@@ -70,18 +70,18 @@ public class main {
         
         for (int i = 1; i < 2; i++) {
             User user = users.read_user(i);
+            if (user == null){
+                System.out.println("EITA PORRA");
+            }
+            else{
+                System.out.println("EITA OKAY");
+            }
             System.out.println(i + " " + user.getUsername() + " " + user.getEmail() + " " + user.getPassword());
         }
 
         dbf.execute(new AddLoginFromUserCommand(userA));
 
-
         users.delete(userA);
-
-        for (int i = 1; i < 2; i++) {
-            User user = users.read_user(i);
-            System.out.println(i + " " + user.getUsername() + " " + user.getEmail() + " " + user.getPassword());
-        }
 
         ArrayList<Score> scores_user = dbf.getScoresByUsername("WisePedrosa");
         for (int i = 0; i < scores_user.size(); i++) {

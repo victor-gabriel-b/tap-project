@@ -12,7 +12,7 @@ public class UserManagerMemory implements UserManager{
     private ArrayList<User> db;
     private LoginValidation lv;
 
-    private int lastId = 1;
+    private int lastId = 0;
 
     public UserManagerMemory(){
         this.lv = new LoginValidation();
@@ -27,8 +27,10 @@ public class UserManagerMemory implements UserManager{
         } catch (Exception e) {
             e.printStackTrace();
         }
+        user.setId(getNextId());
         this.db.add(user);
-        return getNextId();
+        
+        return user.getId();
     }
 
     private int getNextId(){
@@ -56,6 +58,7 @@ public class UserManagerMemory implements UserManager{
 
     //Pega os dados do user pelo id e retorna um objeto daquele tipo
     public User read_user(int id){
+        System.out.println(db.size());
         try {
             int index = find_index_by_id(id);
             return this.db.get(index);

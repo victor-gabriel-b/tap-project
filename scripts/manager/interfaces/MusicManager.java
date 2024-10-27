@@ -1,8 +1,11 @@
 package manager.interfaces;
 
 import entity.Music;
+import observer.Observer;
 
 public interface MusicManager {
+    public void addObserver(Observer observer);
+    public void removeObserver(Observer observer);
     //cria um music na tabela do db
     public int add_music(Music music);
 

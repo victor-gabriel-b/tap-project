@@ -4,6 +4,8 @@ import java.util.NoSuchElementException;
 
 import entity.Music;
 import manager.interfaces.MusicManager;
+import observer.MusicSubject;
+import observer.Observer;
 
 public class MusicManagerMemory implements MusicManager{
 
@@ -11,12 +13,25 @@ public class MusicManagerMemory implements MusicManager{
     private int lastId = 1;
 
     public MusicManagerMemory(){
+        this.musicSubject = new MusicSubject();
         this.db = new ArrayList<Music>();
+    }
+
+    private MusicSubject musicSubject;
+
+    public void addObserver(Observer observer) {
+        musicSubject.addObserver(observer);
+    }
+
+    public void removeObserver(Observer observer) {
+        musicSubject.removeObserver(observer);
     }
 
     //cria um music na tabela do db
     public int add_music(Music music){
         this.db.add(music);
+        // Notify observers
+        musicSubject.notifyObservers("Music added: " + music.getName());
         return getNextId();
     }
 

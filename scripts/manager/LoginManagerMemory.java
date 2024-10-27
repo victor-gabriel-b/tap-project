@@ -9,7 +9,7 @@ import manager.interfaces.LoginManager;
 public class LoginManagerMemory implements LoginManager{
     
     private ArrayList<Login> db;
-    private int lastId = 1;
+    private int lastId = 0;
 
     public LoginManagerMemory(){
         this.db = new ArrayList<Login>();
@@ -17,8 +17,9 @@ public class LoginManagerMemory implements LoginManager{
 
     //cria um login na tabela do db
     public int add_login(Login login){
+        login.setId(this.getNextId());
         this.db.add(login);
-        return getNextId();
+        return login.getId();
     }
 
     private int getNextId(){
@@ -67,8 +68,6 @@ public class LoginManagerMemory implements LoginManager{
     public int maxId () {
         int maxId = -1;
         for (int i = 0; i <db.size(); i++) {
-            System.out.println(maxId);
-            System.out.println("não");
             if (db.get(i).getId()>=maxId){
                 maxId = db.get(i).getId();
             }

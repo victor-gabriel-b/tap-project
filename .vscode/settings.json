@@ -2,5 +2,7 @@
     "java.project.sourcePaths": [
         "scripts"
     ],
-    "java.project.referencedLibraries": []
+    "java.project.referencedLibraries": [
+        "scripts/itextpdf-5.5.13.4.jar"
+    ]
 }

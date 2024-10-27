@@ -2,8 +2,8 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import builder.ConcreteUserBuilder;
-import builder.UserDirector;
+// import builder.ConcreteUserBuilder;
+// import builder.UserDirector;
 import command.Command;
 import command.AddLoginFromUserCommand;
 import command.AddScoreFromUserCommand;
@@ -14,11 +14,15 @@ import entity.User;
 import infra.DatabaseFacade;
 import manager.factory.MemoryManagerFactory;
 import report.CsvReport;
+import report.FooterDecorator;
+import report.HeaderDecorator;
 import report.HtmlReport;
+import report.PdfExportDecorator;
+import report.Report;
 import observer.MusicObserver;
-import adapter.MusicAPI;
-import adapter.YouTubeAdapter;
-import adapter.SpotifyAdapter;
+// import adapter.MusicAPI;
+// import adapter.YouTubeAdapter;
+// import adapter.SpotifyAdapter;
 
 public class main {
     public static void main(String[] args) {
@@ -36,7 +40,7 @@ public class main {
         musics.addObserver(musicObserver);
 
         // Usa o padrao builder para criar objetos do tipo User
-        UserDirector userDirector = new UserDirector(new ConcreteUserBuilder());
+        //UserDirector userDirector = new UserDirector(new ConcreteUserBuilder());
 
         User userA = userDirector.constructUser(0, "WesleySilva", "wesley.abc@hotmail.com", "Abcdefg1!");
         int id = users.add_user(userA);
@@ -98,29 +102,39 @@ public class main {
         logins.delete(id);
 
         // Usa o Adapter para buscar músicas no YouTube
-        MusicAPI musicAPI = new YouTubeAdapter();
-        List<String> searchResults = musicAPI.search("Final Fantasy VII Soundtrack");
-        for (String result : searchResults) {
-            System.out.println(result);
-        }
+        // MusicAPI musicAPI = new YouTubeAdapter();
+        // List<String> searchResults = musicAPI.search("Final Fantasy VII Soundtrack");
+        // for (String result : searchResults) {
+        //     System.out.println(result);
+        // }
 
-        // Detalhes de um vídeo específico
-        String videoDetails = musicAPI.getDetails("mmYdf0yqK_Fc");
-        System.out.println(videoDetails);
+        // // Detalhes de um vídeo específico
+        // String videoDetails = musicAPI.getDetails("mmYdf0yqK_Fc");
+        // System.out.println(videoDetails);
 
-        // Usa o Adapter para buscar músicas no Spotify
-        musicAPI = new SpotifyAdapter();
-        searchResults = musicAPI.search("Final Fantasy VII Soundtrack");
-        for (String result : searchResults) {
-            System.out.println(result);
-        }
+        // // Usa o Adapter para buscar músicas no Spotify
+        // musicAPI = new SpotifyAdapter();
+        // searchResults = musicAPI.search("Final Fantasy VII Soundtrack");
+        // for (String result : searchResults) {
+        //     System.out.println(result);
+        // }
 
-        // Detalhes de uma música específica
-        String trackDetails = musicAPI.getDetails("track_id");
-        System.out.println(trackDetails);
+        // // Detalhes de uma música específica
+        // String trackDetails = musicAPI.getDetails("track_id");
+        // System.out.println(trackDetails);
 
+        // Relatório HTML com cabeçalho e rodapé
+        Report report = new HtmlReport();
+        report = new HeaderDecorator(report);
+        report = new FooterDecorator(report);
+        report.generateReport();
 
-        HtmlReport report = new HtmlReport();
+        // Relatório HTML com exportação para PDF
+        Report pdfReport = new HtmlReport();
+        pdfReport = new PdfExportDecorator(pdfReport);
+        pdfReport.generateReport();
+
+        //HtmlReport report = new HtmlReport();
         CsvReport report2 = new CsvReport();
         
         report.generateReport();

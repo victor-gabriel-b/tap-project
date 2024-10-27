@@ -40,7 +40,7 @@ public abstract class Report {
     //itera sobre i e pega os logins não nulos na tabela logins
     protected void getLogins(){
         //System.out.println("teste");
-        //System.out.println(this.maxId);
+        System.out.println(this.maxId);
         for(int i = 1; i <= this.maxId; i++){
             var login = logins.read_login(i);
 

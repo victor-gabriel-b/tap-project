@@ -20,6 +20,7 @@ public class main {
         manager.interfaces.ScoreManager scores = dbf.getScoreManager();
         manager.interfaces.MusicManager musics = dbf.getMusicManager();
         manager.interfaces.LoginManager logins = dbf.getLoginManager();
+        entity.memento.Memento userState;
     
         var userA = new entity.User(0, "WesleySilva", "wesley.abc@hotmail.com", "Abcdefg1!");
         int id = users.add_user(userA);
@@ -91,8 +92,12 @@ public class main {
 
         ZonedDateTime dataHora;
         var loginA = new Login(0, 1, dataHora = ZonedDateTime.now());
+        
         id = logins.add_login(loginA);
         loginA.setId(id);
+
+        userA.setState();
+        userState = userA.saveState();
 
 
         logins.delete(id);

@@ -8,8 +8,6 @@ import manager.factory.DatabaseManagerFactory;
 import manager.factory.ManagerFactory;
 
 public class DatabaseFacade {
-    // A conexão é inicializada na primeira tentativa de acesso ao usuario
-
     private static DatabaseFacade instance;
     private UserManager userManager;
     private MusicManager musicManager;

@@ -3,7 +3,6 @@ import java.sql.*;
 
 public class Database{
     
-    // A conexão é inicializada na primeira tentativa de acesso ao usuario
     private Connection connection;
 
     private static Database instance;

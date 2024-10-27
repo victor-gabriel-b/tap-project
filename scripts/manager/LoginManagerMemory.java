@@ -66,9 +66,11 @@ public class LoginManagerMemory implements LoginManager{
 
     public int maxId () {
         int maxId = -1;
-        for (Login login : db) {
-            if (login.getId()>maxId){
-                maxId = login.getId();
+        for (int i = 0; i <db.size(); i++) {
+            System.out.println(maxId);
+            System.out.println("não");
+            if (db.get(i).getId()>=maxId){
+                maxId = db.get(i).getId();
             }
         }
 

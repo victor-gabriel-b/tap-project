@@ -1,6 +1,7 @@
 package infra;
 import java.util.ArrayList;
 
+import command.Command;
 import entity.Score;
 import entity.User;
 import manager.interfaces.*;
@@ -63,9 +64,7 @@ public class DatabaseFacade {
         return scoreManager.getScoresByUserId(id);
     }
 
-    public int addScoreFromUser(User user, Double score){
-        Score scoreObject = new Score(0, user.getId(), score);
-        return this.scoreManager.add_score(scoreObject);
+    public boolean execute(Command c){
+        return c.execute(this);
     }
-
 }

@@ -1,5 +1,6 @@
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import builder.ConcreteUserBuilder;
 import builder.UserDirector;
@@ -11,6 +12,9 @@ import infra.DatabaseFacade;
 import report.CsvReport;
 import report.HtmlReport;
 import observer.MusicObserver;
+import adapter.MusicAPI;
+import adapter.YouTubeAdapter;
+import adapter.SpotifyAdapter;
 
 public class main {
     public static void main(String[] args) {
@@ -84,6 +88,28 @@ public class main {
 
 
         logins.delete(id);
+
+        // Usa o Adapter para buscar músicas no YouTube
+        MusicAPI musicAPI = new YouTubeAdapter();
+        List<String> searchResults = musicAPI.search("Final Fantasy VII Soundtrack");
+        for (String result : searchResults) {
+            System.out.println(result);
+        }
+
+        // Detalhes de um vídeo específico
+        String videoDetails = musicAPI.getDetails("mmYdf0yqK_Fc");
+        System.out.println(videoDetails);
+
+        // Usa o Adapter para buscar músicas no Spotify
+        musicAPI = new SpotifyAdapter();
+        searchResults = musicAPI.search("Final Fantasy VII Soundtrack");
+        for (String result : searchResults) {
+            System.out.println(result);
+        }
+
+        // Detalhes de uma música específica
+        String trackDetails = musicAPI.getDetails("track_id");
+        System.out.println(trackDetails);
 
 
         HtmlReport report = new HtmlReport();

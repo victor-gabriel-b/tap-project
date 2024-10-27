@@ -10,7 +10,7 @@ import entity.User;
 import infra.DatabaseFacade;
 import report.CsvReport;
 import report.HtmlReport;
-
+import observer.MusicObserver;
 
 public class main {
     public static void main(String[] args) {
@@ -22,6 +22,10 @@ public class main {
         manager.interfaces.ScoreManager scores = dbf.getScoreManager();
         manager.interfaces.MusicManager musics = dbf.getMusicManager();
         manager.interfaces.LoginManager logins = dbf.getLoginManager();
+
+        // Adiciona um observer a MusicManager
+        MusicObserver musicObserver = new MusicObserver();
+        ((manager.MusicManagerDatabase) musics).addObserver(musicObserver);
 
         // Usa o padrao builder para criar objetos do tipo User
         UserDirector userDirector = new UserDirector(new ConcreteUserBuilder());

@@ -1,17 +1,30 @@
 package manager;
 import java.sql.*;
 
+import observer.MusicSubject;
+import observer.Observer;
 import entity.Music;
 import infra.Database;
 import manager.interfaces.MusicManager;
 
 public class MusicManagerDatabase implements MusicManager{
 
+    private MusicSubject musicSubject;
+
+    public void addObserver(Observer observer) {
+        musicSubject.addObserver(observer);
+    }
+
+    public void removeObserver(Observer observer) {
+        musicSubject.removeObserver(observer);
+    }
+
     private Database db;
     
 
     //Inicializador, onde pega a instância do dbe inicializa a tabela music
     public MusicManagerDatabase(){
+        this.musicSubject = new MusicSubject();
         this.db = Database.getInstance();
         initializer();
     }
@@ -24,6 +37,8 @@ public class MusicManagerDatabase implements MusicManager{
 	    + "(?,?,?,?,?) "
         + "RETURNING id";
 
+        int id = -1;
+
         try{
             PreparedStatement pstmt = db.getConnection().prepareStatement(sql);
             pstmt.setString(1, music.getName());
@@ -31,20 +46,31 @@ public class MusicManagerDatabase implements MusicManager{
             pstmt.setString(3, music.getGameName());
             pstmt.setString(4, music.getGenre());
             pstmt.setInt(5, music.getLaunchYear());
+            pstmt.executeUpdate();
             
-            ResultSet rs = pstmt.executeQuery();
+            // ResultSet rs = pstmt.executeQuery();
 
-            int id = rs.getInt("id");
+            // int id = rs.getInt("id");
+            // pstmt.close();
+            // rs.close();
+            // return id;
+
+            var rs = pstmt.getGeneratedKeys();
+            if (rs.next()) {
+                id = rs.getInt(1);
+                music.setId(id);
+            }
             pstmt.close();
-            rs.close();
-            return id;
+
+            // Notify observers
+            musicSubject.notifyObservers("Music added: " + music.getName());
             
 
         } catch(SQLException e){
             e.printStackTrace();
         }
         
-        return -1;
+        return id;
     }
 
     //Pega os dados do usuários pelo id e retorna um objeto daquele tipo

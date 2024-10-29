@@ -15,7 +15,7 @@ public class UserManagerMemory implements UserManager{
     private int lastId = 0;
 
     public UserManagerMemory(){
-        this.lv = new LoginValidation();
+        this.lv = new UserValidation();
         this.db = new ArrayList<User>();
     }
 

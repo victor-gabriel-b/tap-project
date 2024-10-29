@@ -15,7 +15,7 @@ public class UserManagerDatabase implements UserManager {
     //Inicializador, onde pega a instância do db, cria uma instância da classe LoginValidation e inicializa a tabela usuário
     public UserManagerDatabase(){
         this.db = Database.getInstance();
-        this.lv = new LoginValidation();
+        this.lv = new UserValidation();
         initializer();
     }
 

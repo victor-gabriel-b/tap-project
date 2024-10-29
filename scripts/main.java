@@ -39,14 +39,13 @@ public class main {
         MusicObserver musicObserver = new MusicObserver();
         musics.addObserver(musicObserver);
 
-        // Usa o padrao builder para criar objetos do tipo User
         //UserDirector userDirector = new UserDirector(new ConcreteUserBuilder());
 
-        User userA = userDirector.constructUser(0, "WesleySilva", "wesley.abc@hotmail.com", "Abcdefg1!");
+        var userA = new entity.User(0, "WesleySilva", "wesley.abc@hotmail.com", "Abcdefg1!");
         int id = users.add_user(userA);
         userA.setId(id);
 
-        User userB = userDirector.constructUser(0, "WisePedrosa", "wise@it.a.coisa.com", "PAoFR@ANC3S");
+        User userB = new entity.User(0, "WisePedrosa", "wise@it.a.coisa.com", "PAoFR@ANC3S");
         id = users.add_user(userB);
         userB.setId(id);
 
@@ -74,12 +73,6 @@ public class main {
         
         for (int i = 1; i < 2; i++) {
             User user = users.read_user(i);
-            if (user == null){
-                System.out.println("EITA PORRA");
-            }
-            else{
-                System.out.println("EITA OKAY");
-            }
             System.out.println(i + " " + user.getUsername() + " " + user.getEmail() + " " + user.getPassword());
         }
 

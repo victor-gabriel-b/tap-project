@@ -5,12 +5,12 @@ import java.util.NoSuchElementException;
 import entity.User;
 
 import manager.interfaces.UserManager;
-import validation.LoginValidation;
+import validation.UserValidation;
 
 public class UserManagerMemory implements UserManager{
 
     private ArrayList<User> db;
-    private LoginValidation lv;
+    private UserValidation lv;
 
     private int lastId = 0;
 

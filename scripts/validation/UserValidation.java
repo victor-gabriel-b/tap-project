@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 
 import entity.User;
 
-public class LoginValidation {
+public class UserValidation {
     
     public boolean userValidation(String username, String password) throws UsernameInvalidException, PasswordInvalidException {
         
